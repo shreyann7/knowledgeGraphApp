@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var logger = require('morgan');
 var cors = require('cors');
-
+// var neo4j = require('neo4j-driver')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -55,3 +55,5 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
+
+

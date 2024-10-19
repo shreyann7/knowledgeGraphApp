@@ -1,13 +1,13 @@
 <%- include('partials/header') %>
 
 <% if (authorised) { %>
-  <p>Welcome <%= fname %> | <a href="/exit">Log Out</a></p>
+  <p>Welcome <%= fname %> | <a href="/exit">Log Out</a> </button></p>
 
   <div style="display: flex; justify-content: space-between; padding: 20px;">
     <!-- Left section with drop area, input fields, and button -->
     <div style="width: 30%; border: 2px solid black; padding: 20px; border-radius: 15px;">
       <form id="uploadForm" enctype="multipart/form-data">
-        <label for="file" id="drop-area" style="display: flex; align-items: center; justify-content: center; border: 2px dashed #999; height: 200px; border-radius: 10px; cursor: pointer;">
+        <label for="file" class="dropbox" id="drop-area" style="display: flex; align-items: center; justify-content: center; border: 2px dashed #999; height: 200px; border-radius: 10px; cursor: pointer;">
           <span style="font-size: 40px; color: #999;">+</span>
         </label>
         <input type="file" id="file" name="file" style="display: none;" accept="*/*" onchange="updateFileName()">
@@ -25,9 +25,23 @@
     </div>
 
     <!-- Right section (Bot area) -->
-    <div style="width: 65%; border: 2px solid cyan; padding: 20px; border-radius: 15px; text-align: center; background-color: cyan;">
-      <p>BOT</p>
+    <div style="width: 65%; border: 2px solid rgb(0, 0, 0); padding: 20px; border-radius: 15px; background-color: white;">
+      CHAT BOT
+      <div id="chat-container" style="height: 400px; overflow-y: auto; border-bottom: 2px solid #ccc; padding: 10px;">
+        <div id="chatbox">
+          <!-- Chat messages will appear here -->
+        </div>
+      </div>
+
+      <div style="display: flex; margin-top: 10px;">
+        <input id="userMessage" type="text" placeholder="Type a message..." style="flex: 1; padding: 10px; border-radius: 5px; border: 2px solid #ccc;">
+        <button id="sendMessage" style="width:65px; padding: 10px 20px; background-color: rgb(252, 7, 7); color: white; border: none; border-radius: 5px; margin-left: 10px;">Send</button>
+      </div>
     </div>
+  </div>
+
+
+
   </div>
 
   <!-- Center section (Graph area) -->
@@ -78,6 +92,9 @@
     const subject = document.getElementById('subject').value;
     const topicTitle = document.getElementById('topic').value;
     const fileInput = document.getElementById('file');
+
+    console.log(fileInput.files[0]);
+
     const filePath = fileInput.files.length > 0 ? fileInput.files[0].name : ""; // Get the uploaded file name
 
     // Create the JSON object
@@ -110,6 +127,7 @@
     })
     .then(data => {
       console.log('Success:', data); // Log the response data
+      // Refresh the graph
       // Handle successful response (e.g., display a message)
     })
     .catch((error) => {
@@ -123,4 +141,6 @@
   });
 });
 </script>
+
+
 
